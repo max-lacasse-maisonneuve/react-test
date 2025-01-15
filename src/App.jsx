@@ -5,18 +5,18 @@ import Footer from "./composantes/global/Footer";
 import Header from "./composantes/global/Header";
 import AccueilHero from "./composantes/accueil/AccueilHero";
 import Page404 from "./composantes/global/Page404";
-import { useGA4 } from "react-ga4";
+import ReactGA from "react-ga4";
 import { useEffect } from "react";
 
 function App() {
     const location = useLocation();
-    const ga4 = useGA4("G-S698NH91GB");
+    ReactGA.initialize("G-S698NH91GB");
 
     useEffect(() => {
         console.log(location.pathname);
 
-        ga4.pageview(location.pathname);
-    }, [location, ga4]);
+        ReactGA.send({ hitType: "pageview", page: location.pathname, title: location.title });
+    }, [location]);
 
     return (
         <>
