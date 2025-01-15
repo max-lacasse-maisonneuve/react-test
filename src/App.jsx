@@ -1,47 +1,25 @@
-import { useState, useRef, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import "./assets/css/styles.css";
+import { Route, Routes } from "react-router-dom";
+import AboutHero from "./composantes/accueil/AboutHero";
+import Footer from "./composantes/global/Footer";
+import Header from "./composantes/global/Header";
+import AccueilHero from "./composantes/accueil/AccueilHero";
+import Page404 from "./composantes/global/Page404";
 
 function App() {
-    const [count, setCount] = useState(0);
-    const myRef = useRef(null);
-    
-    useEffect(() => {
-        console.log("mounted");
-
-        myRef.current.addEventListener("click", handleClick);
-        return () => {
-            console.log("unmounted");
-            myRef.current.removeEventListener("click", handleClick);
-        };
-    }, []);
-
-    function handleClick() {
-        console.log("click");
-    }
     return (
         <>
-            {/* Commentaire */}
-            <div>
-                <a href="https://vite.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
-            <>
-                <h2 ref={myRef}>Patate</h2>
-            </>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+            {/* Placer l'entete ici */}
+            <Header />
+            <Routes>
+                <Route path="/" element={<AccueilHero />} />
+                <Route path="patate">
+                    <Route path="" element={<Page404 />} />
+                    <Route path="a-propos" element={<AboutHero />} />
+                </Route>
+                <Route path="*" element={<Page404 />} />
+            </Routes>
+            <Footer />
         </>
     );
 }

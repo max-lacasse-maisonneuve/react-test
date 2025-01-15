@@ -1,10 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import App from "./App.jsx";
 
+const helmetContext = {};
 createRoot(document.getElementById("root")).render(
     <StrictMode>
-        <App estArchive={true} />
+        <HelmetProvider context={helmetContext}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </HelmetProvider>
     </StrictMode>
 );
