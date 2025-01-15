@@ -1,12 +1,23 @@
 import "./assets/css/styles.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import AboutHero from "./composantes/accueil/AboutHero";
 import Footer from "./composantes/global/Footer";
 import Header from "./composantes/global/Header";
 import AccueilHero from "./composantes/accueil/AccueilHero";
 import Page404 from "./composantes/global/Page404";
+import { useGA4 } from "react-ga4";
+import { useEffect } from "react";
 
 function App() {
+    const location = useLocation();
+    const ga4 = useGA4("G-S698NH91GB");
+
+    useEffect(() => {
+        console.log(location.pathname);
+
+        ga4.pageview(location.pathname);
+    }, [location, ga4]);
+
     return (
         <>
             {/* Placer l'entete ici */}
